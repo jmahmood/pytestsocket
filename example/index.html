@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>pytestsocket</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      body {
+        text-align: center;
+        min-width: 500px;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#open").click(function(evt) {
+          evt.preventDefault();
+ 
+          var host = "localhost";
+          var port = "169";
+          var uri = "/tests";
+ 
+          ws = new WebSocket("ws://" + host + ":" + port + uri);
+
+          ws.onmessage = function(evt) {
+              console.log("message received: " + evt.data)
+          };
+          ws.onclose = function(evt) {
+              console.log("Test Server Connection was closed.");
+              console.log(evt);
+          };
+          ws.onopen = function(evt) {
+              console.log("Open")
+              console.log(evt);
+          };
+        });
+
+      $("#tests").click(function(evt) {
+          ws.send("test message")
+
+      });
+
+      });
+    </script>
+  </head>
+ 
+  <body>
+    <h1>pytestsocket</h1>
+    <div>
+      <button id="open">Connect</button>
+      <button id="tests">Run tests</button>
+    </div>
+  </body>
+</html>
+ 
