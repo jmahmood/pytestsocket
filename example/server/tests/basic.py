@@ -24,5 +24,3 @@ class TestSequenceFunctions(TestCase):
     def test_sample(self):
         for element in random.sample(self.seq, 5):
             self.assertTrue(element in self.seq)
-
-print "WTF LOL"
