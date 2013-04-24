@@ -14,11 +14,10 @@ Dependencies
 How?
 ====
 1. Run server
-    python ./server.py
+    python ./example/server/server.py
     (Alternatively, import the class and create your own tornado server)
-2. Prep an HTML page that can send/receive messages from the server. (/example/index.html)
-3.
-3. Click "Run All Tests".
+2. Open the example HTML page in your browser (./example/html/index.html)
+3. Click "Basic Tests".
 
 
 Why?
