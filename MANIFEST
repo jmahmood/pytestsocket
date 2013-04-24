@@ -1,0 +1,5 @@
+setup.py
+pytestsocket/__init__.py
+pytestsocket/helpers.py
+pytestsocket/wsserver.py
+pytestsocket/wsunittest.py

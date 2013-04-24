@@ -10,6 +10,9 @@ Dependencies
 - Tornado Server
 - importlib (For Python < 2.7)
 
+Installation
+============
+pip install pytestsocket
 
 How?
 ====
@@ -22,7 +25,6 @@ How?
 
 Why?
 ====
-
 At the company I work for, I do API designs, while a foreign team develops them.  There are multitude of possible issues that can come into the picture between our servers in Japan and their servers in the US.  Thus, we run tests at both ends of the pipe.
 
 Having to log into our machines and run unit tests seems rather ludicrous in 2013.  Also, it seems much easier to actually show the test code with highlighting-enabled in the browser for people who are not using an IDE that has python buit-in.
