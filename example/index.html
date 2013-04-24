@@ -11,6 +11,7 @@
     </style>
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <script>
+      var ws;
       $(document).ready(function () {
         $("#open").click(function(evt) {
           evt.preventDefault();
@@ -35,8 +36,11 @@
         });
 
       $("#tests").click(function(evt) {
-          ws.send("test message")
+          ws.send("")
+      });
 
+      $("#basic").click(function(evt) {
+          ws.send("tests.basic")
       });
 
       });
@@ -47,7 +51,8 @@
     <h1>pytestsocket</h1>
     <div>
       <button id="open">Connect</button>
-      <button id="tests">Run tests</button>
+      <button id="main">Main Tests</button>
+      <button id="basic">Basic Tests</button>
     </div>
   </body>
 </html>

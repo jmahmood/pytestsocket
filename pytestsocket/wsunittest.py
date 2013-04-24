@@ -1,14 +1,13 @@
 __author__ = 'jawaad'
-from unittest import TestCase, TextTestRunner, TestProgram, TestResult
-import random
-import time
+from unittest import TextTestRunner, TestProgram, TestResult
 import types
+from helpers import wstiming
 
 
-class webSocketJsonTestResult(TestResult):
+class webSocketTestResult(TestResult):
     """
     A class that uses the limited IO interface provided by the Tornado websocket class
-    and returns information in the JSON format.
+    and returns information in the text format.
 
     Tornado's websockets only have "write_message" and "close" available.
 
@@ -70,37 +69,39 @@ class webSocketJsonTestResult(TestResult):
             self.stream.write_message("%s" % err)
 
 
-class webSocketJsonTestRunner(TextTestRunner):
+class webSocketTestRunner(TextTestRunner):
 
     def makeResult(self):
-        return webSocketJsonTestResult(self.stream, self.descriptions, self.verbosity)
+        return webSocketTestResult(self.stream, self.descriptions, self.verbosity)
 
-    def run(self, test):
-        """Run the given test case or test suite."""
-        result = self.makeResult()
-        startTime = time.time()
-        test(result)
-        stopTime = time.time()
-        timeTaken = stopTime - startTime
+    def output(self, result):
         result.printErrors()
         self.stream.write_message(result.separator2)
         run = result.testsRun
-        self.stream.write_message("Ran %d test%s in %.3fs" %
-                            (run, run != 1 and "s" or "", timeTaken))
+        self.stream.write_message("Ran %d test%s" % (run, run != 1 and "s" or ""))
         self.stream.write_message("")
         if not result.wasSuccessful():
             output = "FAILED ("
-            failed, errored = map(len, (result.failures, result.errors))
+            failed, error_generated = map(len, (result.failures, result.errors))
             if failed:
                 output += "failures=%d" % failed
-            if errored:
+            if error_generated:
                 if failed:
                     output += ", "
-                output += "errors=%d" % errored
+                output += "errors=%d" % error_generated
             output += ")"
             self.stream.write_message(output)
         else:
             self.stream.write_message("OK")
+
+    def run(self, test):
+        """Run the given test case or test suite."""
+        result = self.makeResult()
+
+        with wstiming(self.stream):
+            test(result)
+
+        self.output(result)
         return result
 
 

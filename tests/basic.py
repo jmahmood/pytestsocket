@@ -1,5 +1,6 @@
-from wsserver import *
-import tornado.httpserver
+__author__ = 'jawaad'
+import random
+from unittest import TestCase
 
 
 class TestSequenceFunctions(TestCase):
@@ -24,10 +25,4 @@ class TestSequenceFunctions(TestCase):
         for element in random.sample(self.seq, 5):
             self.assertTrue(element in self.seq)
 
-application = tornado.web.Application([
-    (r'/tests', unittestWebSocketHandler),
-])
-
-http_server = tornado.httpserver.HTTPServer(application)
-http_server.listen(1690)
-tornado.ioloop.IOLoop.instance().start()
+print "WTF LOL"
