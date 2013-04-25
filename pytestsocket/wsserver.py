@@ -53,8 +53,12 @@ class unittestWebSocketHandler(tornado.websocket.WebSocketHandler):
 
         if module:
             # TODO: Reload module if the module has already been loaded. (reload(module))
+            # You may pass the port to the server by commandline; this removes it.
+            argv = sys.argv
+            argv.pop(argv.index("port"))
             return unittestWebSocketTestProgram(
                 module=import_module(module),
+                argv=argv,
                 testRunner=webSocketTestRunner(stream=self)
             )
 

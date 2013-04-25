@@ -106,6 +106,7 @@ class webSocketTestRunner(TextTestRunner):
 
 
 class unittestWebSocketTestProgram(TestProgram):
+
     def runTests(self):
         if isinstance(self.testRunner, (type, types.ClassType)):
             try:
