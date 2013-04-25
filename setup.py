@@ -4,7 +4,7 @@ __author__ = 'jawaad'
 from distutils.core import setup
 
 setup(name='pytestsocket',
-      version='0.11',
+      version='0.112',
       description='Websocket server that allows you to run, cancel, and re-run unittests',
       author='Jawaad Mahmood',
       author_email='ideas@jawaadmahmood.com',
