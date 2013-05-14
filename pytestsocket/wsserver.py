@@ -26,9 +26,7 @@ def module_exists(module_name):
 
 
 class unittestWebSocketHandler(tornado.websocket.WebSocketHandler):
-    """
-    A Tornado websocket server that outputs flat text from incoming test requests.
-    """
+    """A Tornado websocket server that outputs flat text from incoming test requests."""
     def is_valid_module(self, module):
         # TODO: valid modules should be in a config file or something like that.
         return True

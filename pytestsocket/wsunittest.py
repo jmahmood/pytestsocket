@@ -1,5 +1,5 @@
 __author__ = 'jawaad'
-from unittest import TextTestRunner, TestProgram, TestResult
+from unittest import TextTestRunner, TestProgram, TestResult, defaultTestLoader
 import types
 from helpers import wstiming
 
@@ -106,6 +106,19 @@ class webSocketTestRunner(TextTestRunner):
 
 
 class unittestWebSocketTestProgram(TestProgram):
+
+    def __init__(self, module='__main__', defaultTest=None,
+                 argv=None, testRunner=TextTestRunner,
+                 testLoader=defaultTestLoader):
+        """Augments the original init by reloading the test module when you re-run a test.
+        This will be helpful for situations when you have a new """
+        if isinstance(module, type(types)):
+            # This confirms that the module is loaded and in memory.
+            # Under that circumstance, you must force reload the module
+            # This allows us to have dynamic test modules without rebooting
+            # the server (IE: upload & automatically works)
+            self.module = reload(module)
+        super(unittestWebSocketTestProgram, self).__init__(module, defaultTest, argv, testRunner, testLoader)
 
     def runTests(self):
         if isinstance(self.testRunner, (type, types.ClassType)):
