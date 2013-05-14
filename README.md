@@ -38,7 +38,7 @@ Process
 
 Version
 =======
-Current: _0.1_
+Current: _0.12_ Enabled dynamic test running
 
 Roadmap
 =======
