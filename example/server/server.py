@@ -6,9 +6,7 @@ import tornado.web
 import tornado.ioloop
 import tornado.options
 
-
-tornado.options.options['log_file_prefix'].set('./log/server.log')
-tornado.options.options['logging'].set('info')
+tornado.options.parse_config_file("test_server.conf")
 tornado.options.parse_command_line()
 application = tornado.web.Application([
     (r'/tests', unittestWebSocketHandler),
